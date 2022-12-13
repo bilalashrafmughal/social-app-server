@@ -16,7 +16,12 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("DB Connected"));
+  .then(() => {
+    console.log("DB Connected");
+    app.listen(port, () => {
+      console.log(`A Node Js API is listening on port: ${port}`);
+    });
+  });
 
 mongoose.connection.on("error", (err) => {
   console.log(`DB connection error: ${err.message}`);
@@ -69,6 +74,3 @@ app.get("*", (req, res) => {
 });
 
 const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`A Node Js API is listening on port: ${port}`);
-});
